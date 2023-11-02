@@ -37,19 +37,19 @@ tail(Luzon)
 
 #Adding locations of sites
 labs<- tibble(
-  long = c(121.384721, 121.060000),
-  lat =  c(16.645834, 18.240000),
-  names = c("Lower Magat Ecotourism Park", "Calanasan River"))
+  long = c(121.384721, 121.040000, 121.475800, 122.092600, 122.040400),
+  lat =  c(16.645834, 18.085700, 17.540300, 16.594200, 16.472900),
+  Sites = c("Lower Magat Ecotourism Park", "Calanasan River", "Pared River",
+            "Cluster 1: Catallangan River, Dunoy Lake, Dadugen Lake",
+            "Cluster 2: Dinang Creek, Ilaguen River"))
 
 #mapping Luzon
 map_luzon<-ggplot()+
   geom_polygon(data=Luzon, aes(x= long, y= lat, group=group), colour='black', fill='light grey')+
   xlab('Longitude')+
   ylab('Latitude')+
-  geom_point(data = labs, aes(x= long, y=lat), shape=21, color='blue', fill='blue', size=5) +
-  geom_text(data = labs, aes(x = long, y = lat, label = names), hjust=0, nudge_x = 1)+
-  coord_quickmap()+
-  theme_bw()
+  geom_point(data = labs, aes(x= long, y=lat, colour=Sites)) + #site points
+  coord_quickmap()
 
 map_luzon
 
