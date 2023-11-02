@@ -28,12 +28,20 @@ map<-ggplot()+
   theme_bw
 map
 
+
 #extract Luzon from Philppines
 Luzon<-Philippines %>%
   filter(subregion =='Luzon')
 head(Luzon)
 tail(Luzon)
 
+#Adding locations of sites
+labs<- tibble(
+  long = c(121.384721, 121.060000),
+  lat =  c(16.645834, 18.240000),
+  names = c("Lower Magat Ecotourism Park", "Calanasan River"))
+
+#mapping Luzon
 map_luzon<-ggplot()+
   geom_polygon(data=Luzon, aes(x= long, y= lat, group=group), colour='black', fill='light grey')+
   xlab('Longitude')+
@@ -45,9 +53,3 @@ map_luzon<-ggplot()+
 
 map_luzon
 
-
-#Adding locations of sites
-labs<- tibble(
-  long = c(121.384721, 121.060000),
-  lat =  c(16.645834, 18.240000),
-  names = c("Lower Magat Ecotourism Park", "Calanasan River"))
