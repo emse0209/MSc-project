@@ -25,7 +25,7 @@ map<-ggplot()+
   xlab('Longitude')+
   ylab('Latitude')+
   coord_quickmap()+ #makes sure aspect ratios remains unchanged i.e. size of map will not change when exporting
-  theme_bw
+  theme_bw()
 map
 
 
@@ -43,13 +43,27 @@ labs<- tibble(
             "Cluster 1: Catallangan River, Dunoy Lake, Dadugen Lake",
             "Cluster 2: Dinang Creek, Ilaguen River"))
 
+#extracted individual sites in separate data frames.
+Eco<-labs[1,]
+Clu_1<-labs[4,]
+Clu_2<-labs[5,]
+rest<-labs[c(2,3),]
+
 #mapping Luzon
 map_luzon<-ggplot()+
-  geom_polygon(data=Luzon, aes(x= long, y= lat, group=group), colour='black', fill='light grey')+
+  geom_polygon(data=Luzon, aes(x= long, y= lat, group=group), colour='black', fill='light grey')+ #plot
   xlab('Longitude')+
   ylab('Latitude')+
-  geom_point(data = labs, aes(x= long, y=lat, colour=Sites)) + #site points
-  coord_quickmap()
+  
+#added points to show locations
+  geom_point(data = labs, aes(x= long, y=lat), shape=21, color='red', fill='red', size=2) +
+  
+#Nudge_x and Nudge_y are used to move the labels so they don't overlap
+  geom_text(data = rest, aes(x = long, y = lat, label = Sites), hjust=0, nudge_x = 0.15)+
+  geom_text(data = Eco, aes(x = long, y = lat, label = Sites), hjust=0, nudge_y = 0.23)+
+  geom_text(data = Clu_1, aes(x = long, y = lat, label = Sites), hjust=0, nudge_y = 0, nudge_x=0.15)+
+  geom_text(data = Clu_2, aes(x = long, y = lat, label = Sites), hjust=0, nudge_y = -0.2, nudge_x=0.15)+
+  coord_quickmap()+
+  theme_bw() #for white background
 
 map_luzon
-
