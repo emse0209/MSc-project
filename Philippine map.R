@@ -31,7 +31,7 @@ map<-ggplot()+
 map
 
 
-#extract Luzon from Philppines
+#extract Luzon from Philppenes
 Luzon<-Philippines %>%
   filter(subregion =='Luzon')
 head(Luzon)
@@ -42,8 +42,8 @@ labs<- tibble(
   long = c(121.384721, 121.040000, 121.475800, 122.092600, 122.040400),
   lat =  c(16.645834, 18.085700, 17.540300, 16.594200, 16.472900),
   Sites = c("Lower Magat Ecotourism Park", "Calanasan River", "Pared River",
-            "Cluster 1: Catallangan River, Dunoy Lake, Dadugen Lake",
-            "Cluster 2: Dinang Creek, Ilaguen River"))
+            "Cluster 1",
+            "Cluster 2"))
 
 #extracted individual sites in separate data frames.
 Eco<-labs[1,]
@@ -61,7 +61,7 @@ map_luzon<-ggplot()+
   geom_point(data = labs, aes(x= long, y=lat), shape=21, color='red', fill='red', size=2) +
   
 #Nudge_x and Nudge_y are used to move the labels so they don't overlap
-  geom_text(data = rest, aes(x = long, y = lat, label = Sites), hjust=0, nudge_x = 0.15)+
+  geom_text(data = rest, aes(x = long, y = lat, label = Sites), hjust=0, nudge_x = 0.12,  nudge_y=0.1)+
   geom_text(data = Eco, aes(x = long, y = lat, label = Sites), hjust=0, nudge_y = 0.23)+
   geom_text(data = Clu_1, aes(x = long, y = lat, label = Sites), hjust=0, nudge_y = 0, nudge_x=0.15)+
   geom_text(data = Clu_2, aes(x = long, y = lat, label = Sites), hjust=0, nudge_y = -0.2, nudge_x=0.15)+
